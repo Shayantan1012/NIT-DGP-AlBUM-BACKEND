@@ -1,0 +1,26 @@
+const mongoose = require("mongoose");
+const CampusSchema=new mongoose.Schema({
+    place:{
+        type:String,
+        require:[true,'Place is required!!'],
+    },
+    image:[
+{        imageURL:{
+            type:String,
+            require:[true,'Image is required!!'],
+        },
+        
+        description:{
+        type:String,
+        require:[true,'Description is required!!'],
+        minLength:10,
+        }
+}            ]
+
+},{
+    timestamps:true,
+})
+
+
+const Campus=mongoose.model('Campus',CampusSchema);
+export default Campus;
