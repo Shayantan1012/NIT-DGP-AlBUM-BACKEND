@@ -23,4 +23,4 @@ const CampusSchema=new mongoose.Schema({
 
 
 const Campus=mongoose.model('Campus',CampusSchema);
-export default Campus;
+module.exports= Campus;

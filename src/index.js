@@ -1,18 +1,24 @@
 const express=require('express')
-//const cookieParser = require('cookie-parser');
 const ConnectDB=require('./Config/db_config')
 const ServerConfig=require('./Config/server_config')
-const eventRoute=require('./Route/eventRoute')
-const cors=require('cors')
+const eventRoutes=require('./Route/eventRoute')
+const campusRouter=require('./Route/campusRoute')
+const departmentRouter=require('./Route/departmentRoute')
+const cookieParser=require('cookie-parser')
 const app=express()
-app.use(express.text());
-app.use('/events',eventRoute);
-
-app.use(express.json());
+app.use(cookieParser())
 app.use(express.urlencoded({
-  extended: true
-}));
-app.use(cors());
+        extended: true
+      }));
+      
+app.use(express.text());
+app.use(express.json());
+
+app.use('/admin/campus',campusRouter)
+app.use('/admin/events',eventRoutes)
+app.use('/admin/departments',departmentRouter)
+
+
 app.listen(ServerConfig.PORT,async()=>{
     try{
         await ConnectDB();
