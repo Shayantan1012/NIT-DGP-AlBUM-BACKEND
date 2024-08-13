@@ -54,7 +54,7 @@ async function deleteImageByAdmin(req,res){
         });
         }
     }
-    async function getImageByAdmin(req,res){
+    async function getImageByAdmin_campus(req,res){
         try{
 
             const response =await getImageInService("Campus");
@@ -78,5 +78,5 @@ async function deleteImageByAdmin(req,res){
         
     }
 
-module.exports={postImageByAdmin,deleteImageByAdmin,getImageByAdmin}
+module.exports={postImageByAdmin,deleteImageByAdmin,getImageByAdmin_campus}
 

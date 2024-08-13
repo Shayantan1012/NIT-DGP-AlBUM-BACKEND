@@ -6,7 +6,6 @@ const departmentRouter=express.Router();
 const uploader=require('../MulterMiddlewire/multerMiddlewire');
 departmentRouter.post('/',uploader.single('imageURL'), postImageByAdmin);
 departmentRouter.delete('/:eventName/:objectID', deleteImageByAdmin);
-departmentRouter.get('/', getImageByAdmin);
 module.exports=departmentRouter;
 
 

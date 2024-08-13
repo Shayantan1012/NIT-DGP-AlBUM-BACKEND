@@ -53,15 +53,15 @@ async function deleteImageByAdmin(req,res){
         });
         }
     }
-    async function getImageByAdmin(req,res){
+    async function getImageByAdmin_event(req,res){
         try{
 
-            const response =await getImageInService("Event");
+            const response =await getImageInService(req.params.eventName,"Event");
             return res.status(201).json({
                 success:true,
                 error:{},
                 data:{response},
-                massage:"Successfully Delete the Image!!!!"
+                massage:"Successfully Fetched the Image!!!!"
             });
             }
             catch(error){
@@ -77,5 +77,5 @@ async function deleteImageByAdmin(req,res){
         
     }
 
-module.exports={postImageByAdmin,deleteImageByAdmin,getImageByAdmin}
+module.exports={postImageByAdmin,deleteImageByAdmin,getImageByAdmin_event}
 

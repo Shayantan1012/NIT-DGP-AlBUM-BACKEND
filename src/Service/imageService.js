@@ -195,7 +195,7 @@ return res;
                 }
     
                 
-async function getImageInService(imageType){
+async function getImageInService(eventName,imageType){
 
     if(imageType=='Event'){
         var schemaExist=await findSchema(eventName,'Event')

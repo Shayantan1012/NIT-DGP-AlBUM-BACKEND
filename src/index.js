@@ -4,6 +4,7 @@ const ServerConfig=require('./Config/server_config')
 const eventRoutes=require('./Route/eventRoute')
 const campusRouter=require('./Route/campusRoute')
 const departmentRouter=require('./Route/departmentRoute')
+const userRouter=require('./Route/userRouter')
 const cookieParser=require('cookie-parser')
 const app=express()
 app.use(cookieParser())
@@ -18,6 +19,7 @@ app.use('/admin/campus',campusRouter)
 app.use('/admin/events',eventRoutes)
 app.use('/admin/departments',departmentRouter)
 
+app.use('/user',userRouter)
 
 app.listen(ServerConfig.PORT,async()=>{
     try{
