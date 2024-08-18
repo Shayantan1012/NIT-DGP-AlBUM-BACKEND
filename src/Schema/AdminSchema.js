@@ -16,6 +16,7 @@ const AdminSchema=new mongoose.Schema({
     role:{
         type:String,
         enum:['ADMIN','USER'],
+        default:'USER',
         require:[true],
     },
     year:{
@@ -31,7 +32,7 @@ const AdminSchema=new mongoose.Schema({
         minlength:[10,"Please give a valid mobile number!!!"],
 
     },
-    roll:{
+    rollNo:{
         type:String,
         require:[true,'Roll Is required!!'],
         trim:[true],
@@ -58,7 +59,7 @@ const AdminSchema=new mongoose.Schema({
     timestamps:true,
 })
 
-userSchema.pre('save',async function(){
+AdminSchema.pre('save',async function(){
 this.password=await bycrpt(this.password,10)
 console.log(this.password)
 })

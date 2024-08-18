@@ -1,6 +1,7 @@
 
 const express=require('express');
 
+
 const {login,logout}=require('../Controller/authController')
 const authRouter=express.Router();
 authRouter.post('/login', login);
