@@ -1,7 +1,6 @@
 const jwt=require('jsonwebtoken');
 
 const { JWT_SECRET } = require('../Config/server_config');
-const serverConfig = require('../Config/server_config');
 const {COOKIE_SECURE}=require("../Config/server_config")
 async function isLoggedIn(req,res,next){
 const token =req.cookies["authToken"];
@@ -18,12 +17,11 @@ try{
 var decoded=jwt.verify(token,JWT_SECRET);
 console.log("this is decoded res->",decoded);
 
-req.admin={
-    regno:decoded.regno,
-    role:decoded.role,
-    rollno:decoded.rollno,
-   }
-   
+req.admin = {
+    regNo: decoded.regNo,
+    role: decoded.role,
+    id:decoded.id,
+};   
 }catch(error){
     console.log(error);
     if(error.name==='TokenExpiredError'){
@@ -65,6 +63,7 @@ This function checks is the autentication user is an Admin or not*/
 //Because we will call is Admin after is Logged in thats why we will recieve user details//
 async function isAdmin(req,res,next){
 const loggedInUser=req.admin;
+console.log(loggedInUser)
 if(loggedInUser.role==="ADMIN"){
     next();
 }

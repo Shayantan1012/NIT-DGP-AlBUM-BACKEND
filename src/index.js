@@ -6,6 +6,7 @@ const campusRouter=require('./Route/campusRoute')
 const departmentRouter=require('./Route/departmentRoute')
 const userRouter=require('./Route/userRouter')
 const adminRouter=require('./Route/adminRoute')
+const authRouter=require('./Route/authRoute')
 const cookieParser=require('cookie-parser')
 const app=express()
 app.use(cookieParser())
@@ -21,7 +22,7 @@ app.use('/admin/events',eventRoutes)
 app.use('/admin/departments',departmentRouter)
 app.use('/nit-dgp/admin',adminRouter)
 app.use('/user',userRouter)
-
+app.use('/admin/auth',authRouter)
 app.listen(ServerConfig.PORT,async()=>{
     try{
         await ConnectDB();

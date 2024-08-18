@@ -5,8 +5,7 @@ const {postImageInService,deleteImageInService, getImageInService}=require('../S
 async function postImageByAdmin(req,res){
 try{
 const response =await postImageInService({
-eventName:req.body.eventName,
-year:req.body.year,
+placeName:req.body.placeName,
 description:req.body.description,
 imagePath:req.file?.path
 },"Campus")
@@ -40,12 +39,12 @@ async function deleteImageByAdmin(req,res){
         success:true,
         error:{},
         data:{response},
-        massage:"Sorry Unable to Uploaded Image!!!!"
+        massage:"Successfully Delete Image!!!!"
     });
     }
     catch(error){
         console.log(error);
-        console.log("Error in Controller Layer of Events!!!!")
+        console.log("Error in Controller Layer of Campus!!!!")
         return res.status(500).json({
             success:false,
             error:{error},
@@ -57,12 +56,12 @@ async function deleteImageByAdmin(req,res){
     async function getImageByAdmin_campus(req,res){
         try{
 
-            const response =await getImageInService("Campus");
+            const response =await getImageInService(req.params.eventName,"Campus");
             return res.status(201).json({
                 success:true,
                 error:{},
                 data:{response},
-                massage:"Successfully Delete the Image!!!!"
+                massage:"Successfully fetched the Image!!!!"
             });
             }
             catch(error){

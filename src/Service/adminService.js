@@ -48,15 +48,13 @@ async function  deleteAdminInService(adminDetails) {
         )
     
         if(admin){
-            console.log("Admin Already exists!!!!");
-            throw {reason:'Something went wrong ,Admin Already exists',statusCode:500};;
-        }
+            const deleteAdmin=deleteAdminInRepository({
+                regNo:adminDetails.regNo
+            });
+            return deleteAdmin;
+            }
     
         
-        const deleteAdmin=deleteAdminInRepository({
-            regNo:adminDetails.regNo
-        });
-        return deleteAdmin;
      }catch(error){
         console.log("Error in Admin Service Layer!!!!");
         throw Error("Unable to delete Admin!!!!");

@@ -20,7 +20,7 @@ const AdminSchema=new mongoose.Schema({
         require:[true],
     },
     year:{
-        type:Number,
+        type:String,
         require:[true,'Year Is required!!'],
     },
     mobileNumber:{
@@ -60,8 +60,7 @@ const AdminSchema=new mongoose.Schema({
 })
 
 AdminSchema.pre('save',async function(){
-this.password=await bycrpt(this.password,10)
-console.log(this.password)
+this.password=await bycrpt.hash(this.password,10)
 })
 
 const Admin=mongoose.model('Admin',AdminSchema);

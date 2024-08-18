@@ -1,13 +1,13 @@
 const jwt=require('jsonwebtoken')
 const{JWT_EXPIRES,JWT_SECRET} =require('../Config/server_config')
-const {findAdmin}= require('../Reprository/adminRepository')
+const {findAdminInRepository}= require('../Reprository/adminRepository')
 const bcript=require('bcrypt')
 
 async function loginAdmin(authDetails){
 
-const regno=authDetails.email;
+const regNo=authDetails.regNo;
 const plainPassword=authDetails.password;
-const admin=await findAdmin({regno})
+const admin=await findAdminInRepository({regNo:regNo})
 if(!admin){
     throw{message:"No Admin found With given Email!!!",statusCode: 404};
 }
@@ -18,7 +18,7 @@ if(!ispasswordValid){
 }
 
 
-const token = jwt.sign({ regNo:admin.regNo,password:admin.password},  
+const token = jwt.sign({ regNo:admin.regNo,id: admin._id ,role:admin.role},  
     JWT_SECRET, { 
         expiresIn: JWT_EXPIRES 
     }); 
@@ -26,7 +26,6 @@ const token = jwt.sign({ regNo:admin.regNo,password:admin.password},
     return {token,adminData:{
     email:admin.email,
     regno:admin.regNo,
-    rollno:admin.roll,
     role:'ADMIN',
     }
 }

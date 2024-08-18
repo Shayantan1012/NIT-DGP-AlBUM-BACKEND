@@ -6,11 +6,11 @@ const EventImage=require('../Schema/EventSchema')
 async function findSchema(name,type){
     try{
         if(type=='Campus'){
-            const response=await CampusImage.findOne({eventName:name}).exec();
+            const response=await CampusImage.findOne({placeName:name}).exec();
             return response;
         }
         else if(type=='Department'){
-            const response=await DepartmentImage.findOne({eventName:name}).exec();
+            const response=await DepartmentImage.findOne({departmentName:name}).exec();
             return response;
         }
         else if(type=='Event'){

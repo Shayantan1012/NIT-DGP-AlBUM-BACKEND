@@ -1,4 +1,3 @@
-const { error } = require('console');
 const Clodinary=require('../Config/cloudinaryConfig')
 const {postDetails,findSchema}=require('../Reprository/imageReprository');
 const fs=require('fs/promises');
@@ -50,18 +49,17 @@ if(imagePath){
 }
      if(imageType=='Department'){
         const info={
-            eventName:imageDetails.eventName,
-            year:imageDetails.year,
+            departmentName:imageDetails.departmentName,
             description:imageDetails.description,
             imagePath:imageUrl,
                 }
             ///////////////////I need the Department Schema/////////////
             ////I can Upload my Image///
-            const schemaExist=await findSchema(info.eventName,'Department')
+            const schemaExist=await findSchema(info.departmentName,'Department')
             if(schemaExist===null){
-              var res=await postDetails({eventName:info?.eventName,year:info?.year,}
+              var res=await postDetails({departmentName:info?.departmentName}
             ,'Department')
-            await findSchema(info.eventName,'Department')
+            await findSchema(info.departmentName,'Department')
             }else{
                 res=schemaExist;
             }
@@ -77,21 +75,21 @@ if(imagePath){
             });
             await res.save(); // Ensure the save is awaited
             }
+            return res;
 }
      if(imageType=='Campus'){
     const info={
-        eventName:imageDetails.eventName,
-        year:imageDetails.year,
+        placeName:imageDetails.placeName,
         description:imageDetails.description,
         imagePath:imageUrl,
             }
         ///////////////////I need the event Schema/////////////
         ////I can Upload my Image///
-        const schemaExist=await findSchema(info.eventName,'Campus')
+        const schemaExist=await findSchema(info.placeName,'Campus')
         if(schemaExist===null){
-          var res=  await postDetails({eventName:info?.eventName,year:info?.year,}
+          var res=  await postDetails({placeName:info?.placeName}
         ,'Campus')
-        await findSchema(info.eventName,'Campus')
+        await findSchema(info.placeName,'Campus')
         }else{
             res=schemaExist;
         }
@@ -107,6 +105,7 @@ if(imagePath){
         });
         await res.save(); // Ensure the save is awaited
         }
+        return res;
 }
 }
 
@@ -143,7 +142,7 @@ return res;
         const schemaExist=await findSchema(eventName,'Department')
         if(schemaExist===null){
         console.log(`There is no event named ${eventName}!!!!`);
-        throw new Error(`Event ${eventName} not found`);
+        throw new Error(`Department ${eventName} not found`);
         }else{
            var res=schemaExist;
         }
@@ -169,8 +168,8 @@ return res;
     else if(imageType=='Campus'){
                 const schemaExist=await findSchema(eventName,'Campus')
                 if(schemaExist===null){
-                console.log(`There is no event named ${eventName}!!!!`);
-                throw new Error(`Event ${eventName} not found`);
+                console.log(`There is no Campus named ${eventName}!!!!`);
+                throw new Error(`Campus ${eventName} not found`);
                 }else{
                    var res=schemaExist;
                 }

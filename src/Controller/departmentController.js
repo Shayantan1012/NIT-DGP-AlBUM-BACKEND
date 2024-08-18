@@ -5,8 +5,7 @@ const {postImageInService,deleteImageInService, getImageInService}=require('../S
 async function postImageByAdmin(req,res){
 try{
 const response =await postImageInService({
-eventName:req.body.eventName,
-year:req.body.year,
+departmentName:req.body.departmentName,
 description:req.body.description,
 imagePath:req.file?.path
 },"Department")
@@ -40,7 +39,7 @@ async function deleteImageByAdmin(req,res){
         success:true,
         error:{},
         data:{response},
-        massage:"Sorry Unable to Uploaded Image!!!!"
+        massage:"Successfully Delete Image!!!!"
     });
     }
     catch(error){
@@ -57,12 +56,12 @@ async function deleteImageByAdmin(req,res){
     async function getImageByAdmin_department(req,res){
         try{
 
-            const response =await getImageInService("Department");
+            const response =await getImageInService(req.params.eventName,"Department");
             return res.status(201).json({
                 success:true,
                 error:{},
                 data:{response},
-                massage:"Successfully Delete the Image!!!!"
+                massage:"Successfully fetched the Image!!!!"
             });
             }
             catch(error){

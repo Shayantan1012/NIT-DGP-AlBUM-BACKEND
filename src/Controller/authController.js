@@ -1,5 +1,5 @@
 const {loginAdmin}=require('../Service/authService')
-const{COOKIE_SECURE}=require('../config/serverConfig')
+const{COOKIE_SECURE}=require('../Config/server_config')
 
 async function logout(req,res){
 res.cookie("authToken",null,{
@@ -21,18 +21,20 @@ async function login(req,res){
 const loginPayload=req.body;
 
  try{
-const response=await loginAdmin(loginPayload);
+const response=await loginAdmin({
+    regNo:loginPayload.regNo,
+    password:loginPayload.password,
+});
 res.cookie("authToken",response.token,{
     httpOnly:true,
     secure:COOKIE_SECURE,
     maxAge:7*24*60*60*1000,
 })
+console.log("This is login res->",response);
 return res.status(200).json({
 success:true,
 message:'Logged IN successfully!!!!',
-data:{
-    adminData:response.adminData,
-},
+data:{response},
 error:{},
 })
  }///

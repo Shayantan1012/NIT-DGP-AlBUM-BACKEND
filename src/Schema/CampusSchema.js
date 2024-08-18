@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const CampusSchema=new mongoose.Schema({
-    place:{
+    placeName:{
         type:String,
         require:[true,'Place is required!!'],
     },

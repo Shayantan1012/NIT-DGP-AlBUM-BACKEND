@@ -39,7 +39,7 @@ async function deleteImageByAdmin(req,res){
         success:true,
         error:{},
         data:{response},
-        massage:"Sorry Unable to Uploaded Image!!!!"
+        massage:"Successfully Delete Image!!!!"
     });
     }
     catch(error){

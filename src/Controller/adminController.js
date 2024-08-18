@@ -35,16 +35,14 @@ async function createAdmin(req,res){
         const adminDetails={
     firstName:req.body.firstName,
     lastName:req.body.lastName,
-    roleNo:req.body.roleNo,
+    rollNo:req.body.rollNo,
     year:req.body.year,
     mobileNumber:req.body.mobileNumber,
-    roll:req.body.roll,
+    role:req.body.role,
     regNo:req.body.regNo,
     email:req.body.email,
     password:req.body.password,
         }
-
-
     const response =await createAdminInService(adminDetails);
     console.log("CREATE ADNIN---->",response)
     return res.status(201).json({
@@ -67,8 +65,8 @@ async function createAdmin(req,res){
     }
     async function deleteAdmin(req,res){
         try{
-
-            const response =await deleteAdminInService(req.params.regNo);
+            console.log("DELETE_>",req.params)
+            const response =await deleteAdminInService(req.params);
             return res.status(201).json({
                 success:true,
                 error:{},
