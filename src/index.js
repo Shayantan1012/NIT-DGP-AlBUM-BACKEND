@@ -18,7 +18,10 @@ app.use(express.urlencoded({
       
 app.use(express.text());
 app.use(express.json());
-
+app.use(cors({
+        origin :ServerConfig.FRONTEND_URL,
+        credentials:true,
+}))
 app.use('/admin/campus',campusRouter)
 app.use('/admin/events',eventRoutes)
 app.use('/admin/departments',departmentRouter)
