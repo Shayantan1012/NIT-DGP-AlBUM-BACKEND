@@ -3,18 +3,18 @@ const CampusImage=require('../Schema/CampusSchema')
 const DepartmentImage=require('../Schema/DepartmentSchema')
 const EventImage=require('../Schema/EventSchema')
 
-async function findSchema(name,type){
+async function findSchema(type){
     try{
         if(type=='Campus'){
-            const response=await CampusImage.findOne({placeName:name}).exec();
+            const response=await CampusImage.find();
             return response;
         }
         else if(type=='Department'){
-            const response=await DepartmentImage.findOne({departmentName:name}).exec();
+            const response=await DepartmentImage.find();
             return response;
         }
         else if(type=='Event'){
-          const response=await EventImage.findOne({eventName:name}).exec();
+          const response=await EventImage.find();
             return response;
         }
     }catch(error){

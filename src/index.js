@@ -1,4 +1,5 @@
 const express=require('express')
+const cors=require('cors')
 const ConnectDB=require('./Config/db_config')
 const ServerConfig=require('./Config/server_config')
 const eventRoutes=require('./Route/eventRoute')
@@ -8,6 +9,7 @@ const userRouter=require('./Route/userRouter')
 const adminRouter=require('./Route/adminRoute')
 const authRouter=require('./Route/authRoute')
 const cookieParser=require('cookie-parser')
+//app.use(cors());
 const app=express()
 app.use(cookieParser())
 app.use(express.urlencoded({

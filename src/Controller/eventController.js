@@ -56,7 +56,7 @@ async function deleteImageByAdmin(req,res){
     async function getImageByAdmin_event(req,res){
         try{
 
-            const response =await getImageInService(req.params.eventName,"Event");
+            const response =await getImageInService("Event");
             return res.status(201).json({
                 success:true,
                 error:{},

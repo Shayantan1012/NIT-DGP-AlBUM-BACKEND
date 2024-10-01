@@ -194,34 +194,34 @@ return res;
                 }
     
                 
-async function getImageInService(eventName,imageType){
+async function getImageInService(imageType){
 
     if(imageType=='Event'){
-        var schemaExist=await findSchema(eventName,'Event')
+        var schemaExist=await findSchema('Event')
         if(schemaExist===null){
-        console.log(`There is no event named ${eventName}!!!!`);
-        throw new Error(`Event ${eventName} not found`);
+        console.log(`There is no event named !!!!`);
+        throw new Error(`Event not found`);
         }
-            return schemaExist.image;    
+            return schemaExist;    
         
         }
     else if (imageType=='Department'){
-        var schemaExist=await findSchema(eventName,'Department')
+        var schemaExist=await findSchema('Department')
         if(schemaExist===null){
-        console.log(`There is no event named ${eventName}!!!!`);
-        throw new Error(`Event ${eventName} not found`);
+        console.log(`There is no Department named !!!!`);
+        throw new Error(`Department not found`);
         }
-            return schemaExist.image;    
+            return schemaExist;    
 
     }
 
     else if(imageType=='Campus'){
-        var schemaExist=await findSchema(eventName,'Campus')
+        var schemaExist=await findSchema('Campus')
         if(schemaExist===null){
-        console.log(`There is no event named ${eventName}!!!!`);
-        throw new Error(`Event ${eventName} not found`);
+            console.log(`There is no Campus named !!!!`);
+            throw new Error(`Campus not found`);
         }
-            return schemaExist.image;    
+            return schemaExist;    
     }
 
     }
