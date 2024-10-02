@@ -1,5 +1,6 @@
 const express=require('express')
 const cors=require('cors')
+const bodyParser = require('body-parser')
 const ConnectDB=require('./Config/db_config')
 const ServerConfig=require('./Config/server_config')
 const eventRoutes=require('./Route/eventRoute')
@@ -12,9 +13,10 @@ const cookieParser=require('cookie-parser')
 //app.use(cors());
 const app=express()
 app.use(cookieParser())
-app.use(express.urlencoded({
-        extended: true
-      }));
+app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(express.urlencoded({
+//         extended: true
+//       }));
       
 app.use(express.text());
 app.use(express.json());

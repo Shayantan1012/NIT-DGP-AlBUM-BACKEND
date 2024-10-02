@@ -8,3 +8,5 @@ eventRouter.post('/',isLoggedIn,isAdmin,uploader.single('imageURL'), postImageBy
 eventRouter.delete('/:eventName/:objectID',isLoggedIn,isAdmin, deleteImageByAdmin);
 eventRouter.get('/',getImageByAdmin_event);
 module.exports=eventRouter;
+
+////

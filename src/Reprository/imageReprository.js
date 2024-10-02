@@ -23,7 +23,26 @@ async function findSchema(type){
     }
 
 }
+async function findSchemaWithName(name,type){
+    try{
+        if(type=='Campus'){
+            const response=await CampusImage.findOne({placeName:name});
+            return response;
+        }
+        else if(type=='Department'){
+            const response=await DepartmentImage.findOne({departmentName:name});
+            return response;
+        }
+        else if(type=='Event'){
+          const response=await EventImage.findOne({eventName:name});
+            return response;
+        }
+    }catch(error){
+        console.log(error);
+        console.log("Internal server Error!!!!");
+    }
 
+}
 async function postDetails(schemaDetails,type){    
     try{
         if(type=='Campus'){
@@ -36,6 +55,7 @@ async function postDetails(schemaDetails,type){
         }
         else if(type=='Event'){
             const response=await EventImage.create(schemaDetails);
+            console.log("---------->this is response.....",response)
             return response;
         }
     }catch(error){
@@ -70,5 +90,6 @@ async function deleteImageById(imageId,type){
 module.exports={
     deleteImageById,
     postDetails,
-    findSchema
+    findSchema,
+    findSchemaWithName
 }

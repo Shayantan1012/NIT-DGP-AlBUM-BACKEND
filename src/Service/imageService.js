@@ -1,5 +1,5 @@
 const Clodinary=require('../Config/cloudinaryConfig')
-const {postDetails,findSchema}=require('../Reprository/imageReprository');
+const {postDetails,findSchema,findSchemaWithName}=require('../Reprository/imageReprository');
 const fs=require('fs/promises');
 
 
@@ -24,7 +24,8 @@ if(imagePath){
             }
         ///////////////////I need the event Schema/////////////
         ////I can Upload my Image///
-        const schemaExist=await findSchema(info.eventName,'Event')
+        const schemaExist=await findSchemaWithName(info.eventName,'Event')
+
         if(schemaExist===null){
           var res=  await postDetails({eventName:info?.eventName,year:info?.year}
         ,'Event')
