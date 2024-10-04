@@ -26,7 +26,7 @@ if(imagePath){
         ////I can Upload my Image///
         const schemaExist=await findSchemaWithName(info.eventName,'Event')
 
-        if(schemaExist===null){
+        if(schemaExist===undefined){
           var res=  await postDetails({eventName:info?.eventName,year:info?.year}
         ,'Event')
         await findSchema(info.eventName,'Event')
@@ -57,7 +57,7 @@ if(imagePath){
             ///////////////////I need the Department Schema/////////////
             ////I can Upload my Image///
             const schemaExist=await findSchema(info.departmentName,'Department')
-            if(schemaExist===null){
+            if(schemaExist===undefined){
               var res=await postDetails({departmentName:info?.departmentName}
             ,'Department')
             await findSchema(info.departmentName,'Department')
@@ -87,13 +87,14 @@ if(imagePath){
         ///////////////////I need the event Schema/////////////
         ////I can Upload my Image///
         const schemaExist=await findSchema(info.placeName,'Campus')
-        if(schemaExist===null){
+        if(schemaExist===undefined){
           var res=  await postDetails({placeName:info?.placeName}
         ,'Campus')
         await findSchema(info.placeName,'Campus')
         }else{
             res=schemaExist;
         }
+
         
        if(res){
         if (!res.image) {
@@ -114,8 +115,8 @@ if(imagePath){
 async function deleteImageInService(objectID,eventName,imageType){
 
     if(imageType=='Event'){
-    const schemaExist=await findSchema(eventName,'Event')
-    if(schemaExist===null){
+    const schemaExist=await findSchemaWithName(eventName,'Event')
+    if(schemaExist===undefined){
     console.log(`There is no event named ${eventName}!!!!`);
     throw new Error(`Event ${eventName} not found`);
     }else{
@@ -140,8 +141,8 @@ return res;
     }
 
     else if(imageType=='Department'){
-        const schemaExist=await findSchema(eventName,'Department')
-        if(schemaExist===null){
+        const schemaExist=await findSchemaWithName(eventName,'Department')
+        if(schemaExist===undefined){
         console.log(`There is no event named ${eventName}!!!!`);
         throw new Error(`Department ${eventName} not found`);
         }else{
@@ -167,8 +168,8 @@ return res;
 
 
     else if(imageType=='Campus'){
-                const schemaExist=await findSchema(eventName,'Campus')
-                if(schemaExist===null){
+                const schemaExist=await findSchemaWithName(eventName,'Campus')
+                if(schemaExist===undefined){
                 console.log(`There is no Campus named ${eventName}!!!!`);
                 throw new Error(`Campus ${eventName} not found`);
                 }else{
@@ -199,7 +200,7 @@ async function getImageInService(imageType){
 
     if(imageType=='Event'){
         var schemaExist=await findSchema('Event')
-        if(schemaExist===null){
+        if(schemaExist===undefined){
         console.log(`There is no event named !!!!`);
         throw new Error(`Event not found`);
         }
@@ -208,7 +209,7 @@ async function getImageInService(imageType){
         }
     else if (imageType=='Department'){
         var schemaExist=await findSchema('Department')
-        if(schemaExist===null){
+        if(schemaExist===undefined){
         console.log(`There is no Department named !!!!`);
         throw new Error(`Department not found`);
         }
@@ -218,7 +219,7 @@ async function getImageInService(imageType){
 
     else if(imageType=='Campus'){
         var schemaExist=await findSchema('Campus')
-        if(schemaExist===null){
+        if(schemaExist===undefined){
             console.log(`There is no Campus named !!!!`);
             throw new Error(`Campus not found`);
         }
