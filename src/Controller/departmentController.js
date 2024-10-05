@@ -4,6 +4,8 @@ const {postImageInService,deleteImageInService, getImageInService}=require('../S
 
 async function postImageByAdmin(req,res){
 try{
+    console.log("THis is req Body--->",req.body , req.file);
+
 const response =await postImageInService({
 departmentName:req.body.departmentName,
 description:req.body.description,

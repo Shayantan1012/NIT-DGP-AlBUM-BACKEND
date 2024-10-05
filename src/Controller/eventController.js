@@ -3,6 +3,8 @@ const {postImageInService,deleteImageInService, getImageInService}=require('../S
 
 async function postImageByAdmin(req,res){
 try{
+    console.log("THis is req Body--->",req.body , req.file);
+
 const response =await postImageInService({
 eventName:req.body.eventName,
 year:req.body.year,

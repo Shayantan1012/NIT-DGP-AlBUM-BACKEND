@@ -1,3 +1,4 @@
+const { Cloudinary } = require('@cloudinary/url-gen/index');
 const Clodinary=require('../Config/cloudinaryConfig')
 const {postDetails,findSchema,findSchemaWithName}=require('../Reprository/imageReprository');
 const fs=require('fs/promises');
@@ -25,8 +26,8 @@ if(imagePath){
         ///////////////////I need the event Schema/////////////
         ////I can Upload my Image///
         const schemaExist=await findSchemaWithName(info.eventName,'Event')
-
-        if(schemaExist===undefined){
+console.log("schemaExist",schemaExist);
+        if(schemaExist===null){
           var res=  await postDetails({eventName:info?.eventName,year:info?.year}
         ,'Event')
         await findSchema(info.eventName,'Event')
@@ -56,8 +57,10 @@ if(imagePath){
                 }
             ///////////////////I need the Department Schema/////////////
             ////I can Upload my Image///
-            const schemaExist=await findSchema(info.departmentName,'Department')
-            if(schemaExist===undefined){
+            const schemaExist=await findSchemaWithName(info.departmentName,'Department')
+            console.log("schemaExist",schemaExist);
+
+            if(schemaExist===null){
               var res=await postDetails({departmentName:info?.departmentName}
             ,'Department')
             await findSchema(info.departmentName,'Department')
@@ -86,8 +89,11 @@ if(imagePath){
             }
         ///////////////////I need the event Schema/////////////
         ////I can Upload my Image///
-        const schemaExist=await findSchema(info.placeName,'Campus')
-        if(schemaExist===undefined){
+        const schemaExist=await findSchemaWithName(info.placeName,'Campus')
+        console.log("schemaExist",schemaExist);
+
+
+        if(schemaExist===null){
           var res=  await postDetails({placeName:info?.placeName}
         ,'Campus')
         await findSchema(info.placeName,'Campus')
@@ -116,13 +122,24 @@ async function deleteImageInService(objectID,eventName,imageType){
 
     if(imageType=='Event'){
     const schemaExist=await findSchemaWithName(eventName,'Event')
-    if(schemaExist===undefined){
+    if(schemaExist===null){
     console.log(`There is no event named ${eventName}!!!!`);
     throw new Error(`Event ${eventName} not found`);
     }else{
        var res=schemaExist;
     }
-    
+
+    const data = res.image.find(item => item._id == objectID);
+    const imageURL=data.imageURL;
+    const spliteName=imageURL.split('/');
+    var imagename=spliteName[spliteName.length-1];
+    imagename=imagename.split('.')[0]
+
+    const cloudanaryResponse= await  Clodinary.uploader.destroy(imagename,(error,result)=>{
+        console.log(error,result);
+    });
+    console.log("This is Cloudinaries DELETED response->",cloudanaryResponse);
+
     if (res.image && res.image.length > 0) {
         res.image = res.image.filter(
             (obj) => {
@@ -142,7 +159,7 @@ return res;
 
     else if(imageType=='Department'){
         const schemaExist=await findSchemaWithName(eventName,'Department')
-        if(schemaExist===undefined){
+        if(schemaExist===null){
         console.log(`There is no event named ${eventName}!!!!`);
         throw new Error(`Department ${eventName} not found`);
         }else{
@@ -169,7 +186,7 @@ return res;
 
     else if(imageType=='Campus'){
                 const schemaExist=await findSchemaWithName(eventName,'Campus')
-                if(schemaExist===undefined){
+                if(schemaExist===null){
                 console.log(`There is no Campus named ${eventName}!!!!`);
                 throw new Error(`Campus ${eventName} not found`);
                 }else{
@@ -200,7 +217,7 @@ async function getImageInService(imageType){
 
     if(imageType=='Event'){
         var schemaExist=await findSchema('Event')
-        if(schemaExist===undefined){
+        if(schemaExist===null){
         console.log(`There is no event named !!!!`);
         throw new Error(`Event not found`);
         }
@@ -209,7 +226,7 @@ async function getImageInService(imageType){
         }
     else if (imageType=='Department'){
         var schemaExist=await findSchema('Department')
-        if(schemaExist===undefined){
+        if(schemaExist===null){
         console.log(`There is no Department named !!!!`);
         throw new Error(`Department not found`);
         }
@@ -219,7 +236,7 @@ async function getImageInService(imageType){
 
     else if(imageType=='Campus'){
         var schemaExist=await findSchema('Campus')
-        if(schemaExist===undefined){
+        if(schemaExist===null){
             console.log(`There is no Campus named !!!!`);
             throw new Error(`Campus not found`);
         }

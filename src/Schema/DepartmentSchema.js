@@ -14,7 +14,7 @@ const DepartmentSchema=new mongoose.Schema({
         description:{
         type:String,
         require:[true,'Description is required!!'],
-        minLength:10,
+       // minLength:10,
         }
 }            ]
 
