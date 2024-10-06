@@ -33,7 +33,7 @@ req.admin = {
 return res.status(200).json({
     success:true,
     message:'Log Out Successfully!!!',
-    error:{},
+    error:{name:error.name},
     data:{},
 })        
     }
