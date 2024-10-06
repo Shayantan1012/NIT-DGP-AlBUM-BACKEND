@@ -212,7 +212,52 @@ return res;
 
                 }
     
-                
+async function changeImageNameInService(newName,Name,imageType){
+
+    if(imageType=='Event'){
+    const schemaExist=await findSchemaWithName(Name,'Event')
+    if(schemaExist===null){
+    console.log(`There is no event named ${Name}!!!!`);
+    throw new Error(`Event ${Name} not found`);
+    }else{
+       var res=schemaExist;
+    }
+        res.eventName=newName;
+        await res.save();
+        return res;
+    }
+
+    else if(imageType=='Department'){
+        const schemaExist=await findSchemaWithName(Name,'Department')
+        if(schemaExist===null){
+        console.log(`There is no event named ${Name}!!!!`);
+        throw new Error(`Department ${Name} not found`);
+        }else{
+           var res=schemaExist;
+        }
+        res.departmentName=newName;
+        await res.save();
+        return res;
+                }
+
+
+    else if(imageType=='Campus'){
+                const schemaExist=await findSchemaWithName(Name,'Campus')
+                if(schemaExist===null){
+                console.log(`There is no Campus named ${Name}!!!!`);
+                throw new Error(`Campus ${Name} not found`);
+                }else{
+                   var res=schemaExist;
+                }
+                res.placeName=newName;
+                await res.save();
+                return res;
+                            }
+
+                }
+    
+
+
 async function getImageInService(imageType){
 
     if(imageType=='Event'){
@@ -248,4 +293,4 @@ async function getImageInService(imageType){
 
     
     
-module.exports={postImageInService,deleteImageInService,getImageInService}
+module.exports={postImageInService,deleteImageInService,getImageInService,changeImageNameInService}

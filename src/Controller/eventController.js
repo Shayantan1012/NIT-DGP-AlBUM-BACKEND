@@ -1,5 +1,5 @@
 
-const {postImageInService,deleteImageInService, getImageInService}=require('../Service/imageService')
+const {postImageInService,deleteImageInService, getImageInService, changeImageNameInService}=require('../Service/imageService')
 
 async function postImageByAdmin(req,res){
 try{
@@ -34,7 +34,6 @@ catch(error){
 ///objectID,eventName,imageType
 async function deleteImageByAdmin(req,res){
     try{
-
     const response =await deleteImageInService(req.params.objectID,req.params.eventName,"Event");
     console.log("DELETE---->",response)
     return res.status(201).json({
@@ -55,7 +54,30 @@ async function deleteImageByAdmin(req,res){
         });
         }
     }
-    async function getImageByAdmin_event(req,res){
+
+    async function changeEventNameByAdmin(req,res){
+        try{
+        const response =await changeImageNameInService(req.params.eventName,req.params.oldEventName,"Event");
+        return res.status(201).json({
+            success:true,
+            error:{},
+            data:{response},
+            massage:"Successfully Change Image Name!!!!"
+        });
+        }
+        catch(error){
+            console.log(error);
+            console.log("Error in Controller Layer of Events!!!!")
+            return res.status(500).json({
+                success:false,
+                error:{error},
+                data:{},
+                massage:"Sorry Unable to Change Image Name!!!!"
+            });
+            }
+        }
+
+        async function getImageByAdmin_event(req,res){
         try{
 
             const response =await getImageInService("Event");
@@ -79,5 +101,5 @@ async function deleteImageByAdmin(req,res){
         
     }
 
-module.exports={postImageByAdmin,deleteImageByAdmin,getImageByAdmin_event}
+module.exports={postImageByAdmin,deleteImageByAdmin,getImageByAdmin_event,changeEventNameByAdmin}
 
